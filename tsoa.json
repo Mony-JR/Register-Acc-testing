@@ -2,7 +2,8 @@
     "entryFile": "src/server.ts",
     "noImplicitAdditionalProperties": "throw-on-extras",
     "controllerPathGlobs": [
-      "src/controllers/*.controller.ts"
+      "src/controllers/*.controller.ts",
+      "src/controllers/userControllers/*.controller.ts"
     ],
     "spec": {
       "outputDirectory": "src/docs",
