@@ -24,5 +24,9 @@ export interface RegisterReq{
     email?: string;
     name?: string;
     password?: string;
-    code?: string;
+}
+
+export interface LoginReq{
+    email:string;
+    password:string
 }

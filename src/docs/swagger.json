@@ -70,11 +70,24 @@
 					},
 					"password": {
 						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"LoginReq": {
+				"properties": {
+					"email": {
+						"type": "string"
 					},
-					"code": {
+					"password": {
 						"type": "string"
 					}
 				},
+				"required": [
+					"email",
+					"password"
+				],
 				"type": "object",
 				"additionalProperties": false
 			}
@@ -483,7 +496,14 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/RegisterReq"
+										}
+									],
+									"nullable": true
+								}
 							}
 						}
 					}
@@ -513,7 +533,14 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/RegisterReq"
+										}
+									],
+									"nullable": true
+								}
 							}
 						}
 					}
@@ -550,7 +577,14 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/RegisterReq"
+										}
+									],
+									"nullable": true
+								}
 							}
 						}
 					}
@@ -565,19 +599,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"properties": {
-									"password": {
-										"type": "string"
-									},
-									"email": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"password",
-									"email"
-								],
-								"type": "object"
+								"$ref": "#/components/schemas/LoginReq"
 							}
 						}
 					}
