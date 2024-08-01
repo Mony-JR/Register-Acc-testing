@@ -342,6 +342,9 @@
 						}
 					}
 				},
+				"tags": [
+					"S3 upload"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -393,6 +396,9 @@
 						}
 					}
 				},
+				"tags": [
+					"S3 upload"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -453,6 +459,9 @@
 						}
 					}
 				},
+				"tags": [
+					"S3 upload"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -479,6 +488,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Authentication"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -506,6 +518,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Authentication"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -540,6 +555,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Authentication"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {

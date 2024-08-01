@@ -62,3 +62,8 @@ export class RegisterService {
         }
     }
 }
+
+
+Cognito_clientID=16rqodcp62dmmsb84s3pnveve4
+
+Cognito_secretHash=1is4nnplkt82h1te8fq28qbpdkj6uhu7fmjua1f2g9cplga0cqa9

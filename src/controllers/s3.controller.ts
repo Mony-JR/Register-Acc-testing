@@ -1,9 +1,10 @@
-import { Controller, Route, UploadedFile, Post, FormField, Put, Path } from "tsoa";
+import { Controller, Route, UploadedFile, Post, FormField, Put, Path, Tags } from "tsoa";
 import { S3Service } from "../services/s3-service";
 import { UserRequest } from "../services/s3-type";
 // import { UserRequest } from "../services/s3-type";
 
 @Route('v2/upload')
+@Tags('S3 upload')
 export class UploadController extends Controller {
     private s3Service = new S3Service();
 

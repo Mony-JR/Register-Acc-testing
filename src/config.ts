@@ -9,6 +9,8 @@ type Config = {
   region: string;
   keyId: string;
   keySecret: string;
+  clientID: string;
+  secretHash:string;
 };
 
 // Function to load and validate environment variables
@@ -26,6 +28,8 @@ function loadConfig(): Config {
     AWS_REGOIN: yup.string().required(),
     AWS_ACCESS_KEY_ID: yup.string().required(),
     AWS_SECRETKEY: yup.string().required(),
+    Cognito_clientID: yup.string().required(),
+    Cognito_secretHash: yup.string().required(),
   }).required();
 
   // Validate the environment variables
@@ -43,6 +47,9 @@ function loadConfig(): Config {
     region: envVars.AWS_REGOIN,
     keyId: envVars.AWS_ACCESS_KEY_ID,
     keySecret: envVars.AWS_SECRETKEY,
+    secretHash:envVars.Cognito_secretHash,
+    clientID:envVars.Cognito_clientID,
+
 
   };
 }

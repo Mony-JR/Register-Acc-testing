@@ -1,13 +1,14 @@
-import { Body, Controller, Post, Query, Route } from "tsoa";
+import { Body, Controller, Post, Query, Route, Tags } from "tsoa";
 import { RegisterReq} from "../../Models/register/user-register";
 import { RegisterService } from "../../services/userService/register-service";
 
 
 @Route('/v3/users/register')
-
+@Tags('Authentication')
 export class RegisterController extends Controller {
 
     private RegisterService = new RegisterService();
+    
 
     @Post()
     public async registerUser(
@@ -27,7 +28,7 @@ export class RegisterController extends Controller {
         @Query() confirmationCode: string
     ): Promise<any> {
         try {
-            const result = await this.RegisterService.ConfirmCode(email, confirmationCode);
+            const result = await this.RegisterService.ConfirmCode1(email, confirmationCode)
             return result;
         } catch (e) {
             console.error("Error in confirming code:", e);
