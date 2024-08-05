@@ -11,6 +11,9 @@ type Config = {
   keySecret: string;
   clientID: string;
   secretHash:string;
+  googleID: string;
+  googleKey: string;
+  host: string;
 };
 
 // Function to load and validate environment variables
@@ -30,6 +33,10 @@ function loadConfig(): Config {
     AWS_SECRETKEY: yup.string().required(),
     Cognito_clientID: yup.string().required(),
     Cognito_secretHash: yup.string().required(),
+    COGNITO_APP_CLIENT_ID:yup.string().required(),
+    COGNITO_APP_CLIENT_SECRET:yup.string().required(),
+    HOST:yup.string().required(),
+
   }).required();
 
   // Validate the environment variables
@@ -49,6 +56,9 @@ function loadConfig(): Config {
     keySecret: envVars.AWS_SECRETKEY,
     secretHash:envVars.Cognito_secretHash,
     clientID:envVars.Cognito_clientID,
+    googleID: envVars.COGNITO_APP_CLIENT_ID,
+    googleKey: envVars.COGNITO_APP_CLIENT_SECRET,
+    host: envVars.HOST,
 
 
   };

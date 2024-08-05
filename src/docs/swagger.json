@@ -605,6 +605,24 @@
 					}
 				}
 			}
+		},
+		"/v3/users/register/signin/google": {
+			"get": {
+				"operationId": "ShowConsenScreen",
+				"responses": {
+					"204": {
+						"description": "No content"
+					},
+					"302": {
+						"description": ""
+					}
+				},
+				"tags": [
+					"Authentication"
+				],
+				"security": [],
+				"parameters": []
+			}
 		}
 	},
 	"servers": [
