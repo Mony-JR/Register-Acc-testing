@@ -606,9 +606,9 @@
 				}
 			}
 		},
-		"/v3/users/register/signin/google": {
+		"/v4/users/google": {
 			"get": {
-				"operationId": "ShowConsenScreen",
+				"operationId": "GoogleConsentScreen",
 				"responses": {
 					"204": {
 						"description": "No content"
@@ -618,10 +618,47 @@
 					}
 				},
 				"tags": [
-					"Authentication"
+					"Google"
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/v4/users/signin/google/callback": {
+			"get": {
+				"operationId": "HandleGoogleCallback",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Google"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "code",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "state",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		}
 	},

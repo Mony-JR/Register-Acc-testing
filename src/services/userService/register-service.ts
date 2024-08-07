@@ -104,4 +104,10 @@ export class RegisterService {
             throw error;
         }
     }
+    public async GetToken(code:string,token:string):Promise<any>{
+        console.log("code is ",code)
+        console.log("token is ",token)
+        return {"message":code,token}
+        
+    }
 }

@@ -8,6 +8,8 @@ import { UserController } from './../../controllers/user.controller';
 import { UploadController } from './../../controllers/s3.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { RegisterController } from './../../controllers/userControllers/register.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { RegisterController_Google } from './../../controllers/userControllers/google.controller';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 const multer = require('multer');
 
@@ -458,11 +460,11 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/v3/users/register/signin/google',
-            ...(fetchMiddlewares<RequestHandler>(RegisterController)),
-            ...(fetchMiddlewares<RequestHandler>(RegisterController.prototype.ShowConsenScreen)),
+        app.get('/v4/users/google',
+            ...(fetchMiddlewares<RequestHandler>(RegisterController_Google)),
+            ...(fetchMiddlewares<RequestHandler>(RegisterController_Google.prototype.GoogleConsentScreen)),
 
-            async function RegisterController_ShowConsenScreen(request: ExRequest, response: ExResponse, next: any) {
+            async function RegisterController_Google_GoogleConsentScreen(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     redirect: {"in":"res","name":"302","required":true,"dataType":"void"},
             };
@@ -473,10 +475,41 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             try {
                 validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
-                const controller = new RegisterController();
+                const controller = new RegisterController_Google();
 
               await templateService.apiHandler({
-                methodName: 'ShowConsenScreen',
+                methodName: 'GoogleConsentScreen',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/v4/users/signin/google/callback',
+            ...(fetchMiddlewares<RequestHandler>(RegisterController_Google)),
+            ...(fetchMiddlewares<RequestHandler>(RegisterController_Google.prototype.handleGoogleCallback)),
+
+            async function RegisterController_Google_handleGoogleCallback(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    code: {"in":"query","name":"code","required":true,"dataType":"string"},
+                    state: {"in":"query","name":"state","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new RegisterController_Google();
+
+              await templateService.apiHandler({
+                methodName: 'handleGoogleCallback',
                 controller,
                 response,
                 next,
