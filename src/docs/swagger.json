@@ -624,9 +624,98 @@
 				"parameters": []
 			}
 		},
-		"/v4/users/signin/google/callback": {
+		"/v4/users/sigin/google/callback": {
 			"get": {
 				"operationId": "HandleGoogleCallback",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Google"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/v4/users/facebook": {
+			"get": {
+				"operationId": "FacebookConsentScreen",
+				"responses": {
+					"204": {
+						"description": "No content"
+					},
+					"302": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"Location": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"Location"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Google"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/v4/users/sigin/facebook/callback": {
+			"get": {
+				"operationId": "HandleFacebookCallback",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -641,24 +730,7 @@
 					"Google"
 				],
 				"security": [],
-				"parameters": [
-					{
-						"in": "query",
-						"name": "code",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"in": "query",
-						"name": "state",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
+				"parameters": []
 			}
 		}
 	},

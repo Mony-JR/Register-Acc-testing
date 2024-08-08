@@ -10,7 +10,7 @@ type Config = {
   keyId: string;
   keySecret: string;
   clientID: string;
-  secretHash:string;
+  clientSecret:string;
   googleID: string;
   googleKey: string;
   host: string;
@@ -54,7 +54,7 @@ function loadConfig(): Config {
     region: envVars.AWS_REGOIN,
     keyId: envVars.AWS_ACCESS_KEY_ID,
     keySecret: envVars.AWS_SECRETKEY,
-    secretHash:envVars.Cognito_secretHash,
+    clientSecret:envVars.Cognito_secretHash,
     clientID:envVars.Cognito_clientID,
     googleID: envVars.COGNITO_APP_CLIENT_ID,
     googleKey: envVars.COGNITO_APP_CLIENT_SECRET,

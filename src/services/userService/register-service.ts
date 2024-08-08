@@ -3,10 +3,14 @@ import { LoginReq, RegisterReq } from "../../Models/register/user-register";
 import { RegisterRepo } from "../../user Repo/register/register.repo";
 import configs from "../../config";
 import * as crypto from "crypto";
+import axios from "axios";
 
 
 export class RegisterService {
+
     private registerRepo = new RegisterRepo();
+
+
     private cognitoClient = new CognitoIdentityProviderClient({ region: configs.region });
     private calculateSecretHash(username: string, clientId: string, clientSecret: string): string {
         const hash = crypto.createHmac("SHA256", clientSecret)
@@ -25,7 +29,7 @@ export class RegisterService {
             // Save the registration data to your repository
             const register = await this.registerRepo.CreateRegister(data);
 
-            const secretHash = await this.calculateSecretHash(data.email, configs.clientID, configs.secretHash)
+            const secretHash = await this.calculateSecretHash(data.email, configs.clientID, configs.clientSecret)
 
             console.log(`Calculated secret hash for ${data.email}`); // Log the secret hash for debugging
 
@@ -57,7 +61,7 @@ export class RegisterService {
 
     public async ConfirmCode1(email: string, code: string): Promise<RegisterReq | null> {
 
-        const secretHash = await this.calculateSecretHash(email, configs.clientID, configs.secretHash)
+        const secretHash = await this.calculateSecretHash(email, configs.clientID, configs.clientSecret)
 
         const command = new ConfirmSignUpCommand(({
             ClientId: configs.clientID,
@@ -67,15 +71,15 @@ export class RegisterService {
         }));
 
 
-            this.cognitoClient.send(command)
-        
+        this.cognitoClient.send(command)
+
         console.log("Token is ", code);
         return null
 
     }
 
     public async login(data: LoginReq): Promise<RegisterReq | null> {
-        const secretHash = await this.calculateSecretHash(data.email, configs.clientID, configs.secretHash)
+        const secretHash = await this.calculateSecretHash(data.email, configs.clientID, configs.clientSecret)
         try {
             if (!data) {
                 console.log('Data Not having')
@@ -91,8 +95,8 @@ export class RegisterService {
                 }
             });
 
-                const response = await this.cognitoClient.send(command);
-                console.log("Cognito InitiateAuth Response:", response);
+            const response = await this.cognitoClient.send(command);
+            console.log("Cognito InitiateAuth Response:", response);
 
             const data1 = {
             }
@@ -104,10 +108,33 @@ export class RegisterService {
             throw error;
         }
     }
-    public async GetToken(code:string,token:string):Promise<any>{
-        console.log("code is ",code)
-        console.log("token is ",token)
-        return {"message":code,token}
-        
-    }
+
+    public async exchangeGoogleAuthCodeForTokens(code: string) {
+        const tokenURL = "https://fb-3.auth.us-east-1.amazoncognito.com/token";
+    
+        const params = new URLSearchParams({
+          code,
+          client_id: '1c4ppbepgkqg2mnji1qiklc7g8',
+          client_secret: '10b0orrvu9gmnal6duqvlp4nothiomlde88snkhlfduk4l2ng6ir',
+          redirect_uri: `${configs.host}/v4/users/sigin/google/callback`,
+          grant_type: "authorization_code",
+        });
+    
+        try {
+          const response = await axios.post(tokenURL, params.toString(), {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          });
+          return response.data;
+        } catch (error: any) {
+          console.error(
+            "Error exchanging authorization code:",
+            error.response?.data || error.message
+          );
+          throw error;
+        }
+      }
+    
 }
+

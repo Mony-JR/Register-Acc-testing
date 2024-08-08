@@ -490,14 +490,16 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/v4/users/signin/google/callback',
+        app.get('/v4/users/sigin/google/callback',
             ...(fetchMiddlewares<RequestHandler>(RegisterController_Google)),
             ...(fetchMiddlewares<RequestHandler>(RegisterController_Google.prototype.handleGoogleCallback)),
 
             async function RegisterController_Google_handleGoogleCallback(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    code: {"in":"query","name":"code","required":true,"dataType":"string"},
-                    state: {"in":"query","name":"state","required":true,"dataType":"string"},
+                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                    badRequest: {"in":"res","name":"400","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"message":{"dataType":"string","required":true}}},
+                    internalServerError: {"in":"res","name":"500","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"message":{"dataType":"string","required":true}}},
+                    success: {"in":"res","name":"200","required":true,"dataType":"any"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -510,6 +512,65 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
               await templateService.apiHandler({
                 methodName: 'handleGoogleCallback',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/v4/users/facebook',
+            ...(fetchMiddlewares<RequestHandler>(RegisterController_Google)),
+            ...(fetchMiddlewares<RequestHandler>(RegisterController_Google.prototype.FacebookConsentScreen)),
+
+            async function RegisterController_Google_FacebookConsentScreen(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    redirect: {"in":"res","name":"302","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"Location":{"dataType":"string","required":true}}},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new RegisterController_Google();
+
+              await templateService.apiHandler({
+                methodName: 'FacebookConsentScreen',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/v4/users/sigin/facebook/callback',
+            ...(fetchMiddlewares<RequestHandler>(RegisterController_Google)),
+            ...(fetchMiddlewares<RequestHandler>(RegisterController_Google.prototype.handleFacebookCallback)),
+
+            async function RegisterController_Google_handleFacebookCallback(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new RegisterController_Google();
+
+              await templateService.apiHandler({
+                methodName: 'handleFacebookCallback',
                 controller,
                 response,
                 next,
